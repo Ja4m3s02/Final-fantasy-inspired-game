@@ -7,17 +7,27 @@
 using namespace std;
 #ifndef BATTLE_H
 #define BATTLE_H
-#include "Player.h"
+#include "Player.hpp"
 
 class Battle{
     private:
-        bool not_in_battle;
+        bool in_battle;
         bool endFight;
         bool attacker;
         bool defender;
         int attacksFirst;
+        bool startFight;
 
     public:
+
+        //this function is the battle itself
+        void battle(Player & player, Enemy & enemy){
+
+        }
+
+        //these are functions that deal with dealing and receiving damage and whether or not if the damage was dealt from a physical attack like a sword or a magic attack
+
+        //deals damage
         void damageDealt(int damageAmount, Player & player, Enemy & enemy){
             int actualDamange = damageAmount - enemy.stats.defense;
             if(actualDamange < 0){
@@ -29,29 +39,44 @@ class Battle{
             } 
         }
 
-        void physicalDamageDealt(int attack, int defense, Player & player, Enemy & enemy){
+        //physical damage function that involves the damage dealt function
+        int physicalDamageDealt(int attack, int defense, Player & player, Enemy & enemy){
 
         }
 
-        void physicalDamageReceived(int attack, int defense, Player & player, Enemy & enemy){
+        //same as damage dealt but receiving the damage itself
+        int physicalDamageReceived(int attack, int defense, Player & player, Enemy & enemy){
             takeDamage();
         }
 
-        void magicDamageReceived(int magicAttack, int magicDefense, Player & player, Enemy & enemy){
+        int magicDamageDelt(int magicAttack, int magicDefense, Player & player, Enemy & enemy){
+            damageDealt();
+        }
+
+        int magicDamageReceived(int magicAttack, int magicDefense, Player & player, Enemy & enemy){
             takeDamage();
         }
 
-        void endOfBattle(Money& playerMoney){
-            if (enemies.empty()) {
-                in_battle = false;
-                playerMoney.fromFights();
+        void randomEncounters(){
+            random_device rd;
+            mt19937 gen(rd());
+            uniform_int_distribution<int> distrib(0,1);
+
+            int encounter = distrib(gen);
+
+            if(encounter = 1){
+                canStartBattle();
+                turnOrder();
+                endOfBattle();
+            } else {
+
             }
         }
 
-        void numberOfEnemies(){
-            std::random_device rd;
-            std::mt19937 gen(rd());
-            std::uniform_int_distribution<int> distrib(1, 4);
+        int numberOfEnemies(int enemyCount){
+            random_device rd;
+            mt19937 gen(rd());
+            uniform_int_distribution<int> distrib(1, 4);
 
             int enemyCount = distrib(gen);
 
@@ -63,8 +88,30 @@ class Battle{
             std::cout << enemyCount << " enemies appeared!\n";
         }
 
-        bool canStartBattle() {
+        bool canStartBattle(Player.player, Enemy.enemy, int Enemy.numberOfEnemies) {
+            if(numberOfEnemies() = 1 || > 1){
+                startFight = true;
+                inBattle();
+            } else{
+                startFight = false;
+                break;
+            }
             return numberOfEnemies.size() > 1;
+        }
+
+        bool inBattle(){
+            if(startFight = true){
+                in_battle = true;
+            }else {
+                in_battle = false;
+            }
+        }
+
+        bool endOfBattle(Money& playerMoney){
+            if (enemies.empty()) {
+                in_battle = false;
+                playerMoney.fromFights();
+            }
         }
 
         std::vector<battler>& getEnemies() {
@@ -90,11 +137,14 @@ class Battle{
                 }else if(Player.stat.speed < Enemy.stat.speed){
                     turnOrder.pop();
                     turnOrder.push(Player.player)
-                }else{
-
+                }else {
+                    turnOrder.pop()
+                    turnOrder.push(Enenmy.enemy)
                 }
             }
             
         }
+
+        
 };
 #endif

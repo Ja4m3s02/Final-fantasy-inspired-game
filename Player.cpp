@@ -42,7 +42,7 @@ class Player {
             stats.elementalDefense = elementalDefense;
         }
 
-        void setName(std::string player_name) {
+        std::string setName(std::string player_name) {
             name = player_name;
         }
 
@@ -50,7 +50,7 @@ class Player {
             return name;
         }
 
-        void setAge(int player_age) {
+        int setAge(int player_age) {
             age = player_age;
         }
 
