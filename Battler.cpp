@@ -1,9 +1,9 @@
 #include <string>
 #include <random>
-#include "Character.h"
+#include "Character.hpp"
 #ifndef BATTLER_H
 #define BATTLER_H
-#include "Enemy.h"
+#include "Enemy.hpp"
 #include <vector>
 #include <random>
 using namespace std;
@@ -26,7 +26,7 @@ class battler{
         battlerStats stats;
         int numberOfCombatanants;
         bool poisoned;
-        bool paralysed;
+        bool paralyzed;
         bool burned;
         bool canAttack;
 
@@ -71,10 +71,20 @@ class battler{
         }
         
         
-        void withPrecondition(){
-            if(battler == paralysed){
+        bool withPrecondition(){
+            if(battler == paralyzed){
                 stats.speed = stats.speed/2
+                random_device rd;
+                mt19937 gen(rd());
+                uniform_int_distribution<int> distrib(0, 1);
 
+                paralyzed = distrib(gen);
+
+                if(paralyzed == 1){
+                    battler.canAttack() = false;
+                } else {
+                    battler.canAttack() = true;
+                }
             }
 
             if(battler == burned){
@@ -82,7 +92,7 @@ class battler{
             }
 
             if(battler == poisoned){
-
+                stats.elementalAttack = stats.elementalAttack/2
             }
         }
 
@@ -93,6 +103,7 @@ class battler{
         
 };
 
+/*
 inline void battleOrder(){
             std::vector<battler> combatants = { hero, enemy1, enemy2 };
 
@@ -105,4 +116,6 @@ inline void battleOrder(){
                 std::cout << b.getName() << " (Speed: " << b.getSpeed() << ")\n";
             }
         }
+
+*/
 #endif

@@ -42,7 +42,7 @@ class World {
 
         void leaving_fightscene(){
             fightscene = false;
-            endOfBattle()
+            endOfBattle();
             cout << "you are leaving a fight \n";
         }
 };

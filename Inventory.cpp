@@ -4,7 +4,7 @@
 using namespace std;
 #ifndef INVENTORY_H
 #define INVENTORY_H
-#include "Item.h"
+#include "Item.hpp"
 
 
 class Inventory {
@@ -37,7 +37,7 @@ class Inventory {
         }
 
         void displayInventoryStatus() const{
-            std::cout << "===" itemName "===\n";
+            std::cout << "===" << itemName << "===\n";
         }
 
         void Inventory::removeItem(std::string item){

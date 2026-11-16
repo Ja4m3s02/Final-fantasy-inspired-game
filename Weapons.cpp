@@ -15,7 +15,7 @@ struct weaponStats{
 
 class Weapon {
     private:
-        std::string items[25] = {};
+        const std::string items[25] = {};
         int weapon_count = 0;
         std::string name;
         weaponStats stats;
